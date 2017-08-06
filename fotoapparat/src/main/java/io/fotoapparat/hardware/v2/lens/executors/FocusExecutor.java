@@ -1,6 +1,7 @@
 package io.fotoapparat.hardware.v2.lens.executors;
 
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 
 import io.fotoapparat.hardware.operators.AutoFocusOperator;
@@ -9,6 +10,7 @@ import io.fotoapparat.hardware.v2.lens.operations.LensOperationsFactory;
 import io.fotoapparat.hardware.v2.parameters.ParametersProvider;
 import io.fotoapparat.lens.FocusResult;
 import io.fotoapparat.parameter.Flash;
+import io.fotoapparat.parameter.FocusArea;
 
 /**
  * Performs a lens focus routine.
@@ -40,4 +42,7 @@ public class FocusExecutor implements AutoFocusOperator {
         return focusResult;
     }
 
+    @Override public FocusResult autoFocus(@NonNull FocusArea area) {
+        return autoFocus();
+    }
 }

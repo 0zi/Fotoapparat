@@ -16,6 +16,7 @@ import io.fotoapparat.parameter.Size;
 import io.fotoapparat.parameter.selector.FlashSelectors;
 import io.fotoapparat.parameter.selector.SelectorFunction;
 import io.fotoapparat.preview.FrameProcessor;
+import io.fotoapparat.util.Dimensions;
 import io.fotoapparat.view.CameraRenderer;
 import io.fotoapparat.view.CameraView;
 
@@ -61,6 +62,7 @@ public class FotoapparatBuilder {
     CameraErrorCallback cameraErrorCallback = CameraErrorCallback.NULL;
 
     FotoapparatBuilder(@NonNull Context context) {
+        Dimensions.init(context.getResources().getDisplayMetrics());
         this.context = context;
     }
 

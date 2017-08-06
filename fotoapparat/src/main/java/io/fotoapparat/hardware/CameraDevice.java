@@ -1,7 +1,6 @@
 package io.fotoapparat.hardware;
 
-import java.util.List;
-
+import android.support.annotation.NonNull;
 import io.fotoapparat.hardware.operators.AutoFocusOperator;
 import io.fotoapparat.hardware.operators.CapabilitiesOperator;
 import io.fotoapparat.hardware.operators.CaptureOperator;
@@ -14,61 +13,51 @@ import io.fotoapparat.hardware.operators.PreviewStreamOperator;
 import io.fotoapparat.hardware.operators.RendererParametersOperator;
 import io.fotoapparat.hardware.operators.SurfaceOperator;
 import io.fotoapparat.hardware.provider.AvailableLensPositionsProvider;
+import io.fotoapparat.lens.FocusResult;
+import io.fotoapparat.parameter.FocusArea;
 import io.fotoapparat.parameter.LensPosition;
 import io.fotoapparat.parameter.Parameters;
 import io.fotoapparat.parameter.RendererParameters;
 import io.fotoapparat.photo.Photo;
 import io.fotoapparat.preview.PreviewStream;
-import io.fotoapparat.lens.FocusResult;
+import java.util.List;
 
 /**
  * Abstraction for camera hardware.
  */
-public interface CameraDevice extends CaptureOperator,
-        PreviewOperator, CapabilitiesOperator, OrientationOperator, ParametersOperator,
-        ConnectionOperator, SurfaceOperator, PreviewStreamOperator, RendererParametersOperator,
-        ExposureMeasurementOperator, AutoFocusOperator, AvailableLensPositionsProvider {
+public interface CameraDevice
+    extends CaptureOperator, PreviewOperator, CapabilitiesOperator, OrientationOperator,
+    ParametersOperator, ConnectionOperator, SurfaceOperator, PreviewStreamOperator,
+    RendererParametersOperator, ExposureMeasurementOperator, AutoFocusOperator,
+    AvailableLensPositionsProvider {
 
-    @Override
-    void open(LensPosition lensPosition);
+  @Override void open(LensPosition lensPosition);
 
-    @Override
-    void close();
+  @Override void close();
 
-    @Override
-    void startPreview();
+  @Override void startPreview();
 
-    @Override
-    void stopPreview();
+  @Override void stopPreview();
 
-    @Override
-    void setDisplaySurface(Object displaySurface);
+  @Override void setDisplaySurface(Object displaySurface);
 
-    @Override
-    void setDisplayOrientation(int degrees);
+  @Override void setDisplayOrientation(int degrees);
 
-    @Override
-    void updateParameters(Parameters parameters);
+  @Override void updateParameters(Parameters parameters);
 
-    @Override
-    Capabilities getCapabilities();
+  @Override Capabilities getCapabilities();
 
-    @Override
-    FocusResult autoFocus();
+  @Override FocusResult autoFocus();
 
-    @Override
-    void measureExposure();
+  @Override FocusResult autoFocus(@NonNull FocusArea area);
 
-    @Override
-    Photo takePicture();
+  @Override void measureExposure();
 
-    @Override
-    PreviewStream getPreviewStream();
+  @Override Photo takePicture();
 
-    @Override
-    RendererParameters getRendererParameters();
+  @Override PreviewStream getPreviewStream();
 
-    @Override
-    List<LensPosition> getAvailableLensPositions();
+  @Override RendererParameters getRendererParameters();
 
+  @Override List<LensPosition> getAvailableLensPositions();
 }

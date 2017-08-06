@@ -2,6 +2,8 @@ package io.fotoapparat;
 
 import android.content.Context;
 
+import android.support.annotation.NonNull;
+import io.fotoapparat.parameter.FocusArea;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -202,6 +204,17 @@ public class Fotoapparat {
         ensureStarted();
 
         return autoFocusRoutine.autoFocus();
+    }
+
+    /**
+     * Attempts to focus the camera in a certain area asynchronously.
+     *
+     * @return the pending result of focus operation which will deliver result asynchronously.
+     */
+    public PendingResult<FocusResult> focus(@NonNull FocusArea area) {
+        ensureStarted();
+
+        return autoFocusRoutine.autoFocus(area);
     }
 
     /**
