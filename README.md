@@ -1,3 +1,7 @@
+### Fork that makes no practical sense
+
+_Just added work around for area autofocus_
+
 # Fotoapparat
 
 ![Build status](https://travis-ci.org/Fotoapparat/Fotoapparat.svg?branch=master)
