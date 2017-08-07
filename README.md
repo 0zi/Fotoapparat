@@ -1,6 +1,6 @@
 ### Fork that makes no practical sense
 
-_Just added work around for area autofocus_
+_I use this fork to just add some missing functionality, that I would like this library to have_
 
 # Fotoapparat
 

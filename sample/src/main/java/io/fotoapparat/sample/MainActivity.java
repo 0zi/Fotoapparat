@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
   private void snapOnClick(@NonNull View view) {
     view.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        camera.takePicture().toPendingResult().whenDone(new PendingResult.Callback<Photo>() {
+        camera.takePictureInstant().toPendingResult().whenDone(new PendingResult.Callback<Photo>() {
           @Override public void onResult(Photo result) {
             Toast.makeText(getApplicationContext(), "Photo's captured", Toast.LENGTH_LONG).show();
           }
