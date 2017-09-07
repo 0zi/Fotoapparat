@@ -5,14 +5,14 @@ package io.fotoapparat.lens;
  */
 public enum ExposureResultState {
 
-    /**
-     * The camera failed to gather exposure data.
-     */
-    FAILURE,
+  /**
+   * The camera failed to gather exposure data.
+   */
+  FAILURE,
 
-    /**
-     * The camera succeeded to gather exposure data.
-     */
-    SUCCESS
+  /**
+   * The camera succeeded to gather exposure data.
+   */
+  SUCCESS
 
 }

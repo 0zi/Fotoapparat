@@ -1,7 +1,6 @@
 package io.fotoapparat.log;
 
 import android.support.annotation.NonNull;
-
 import java.util.List;
 
 /**
@@ -9,17 +8,15 @@ import java.util.List;
  */
 class CompositeLogger implements Logger {
 
-    private final List<Logger> loggers;
+  private final List<Logger> loggers;
 
-    CompositeLogger(@NonNull List<Logger> loggers) {
-        this.loggers = loggers;
+  CompositeLogger(@NonNull List<Logger> loggers) {
+    this.loggers = loggers;
+  }
+
+  @Override public void log(String message) {
+    for (Logger logger : loggers) {
+      logger.log(message);
     }
-
-    @Override
-    public void log(String message) {
-        for (Logger logger : loggers) {
-            logger.log(message);
-        }
-    }
-
+  }
 }

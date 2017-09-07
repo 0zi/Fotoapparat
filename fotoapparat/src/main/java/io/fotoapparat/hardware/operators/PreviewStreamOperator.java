@@ -7,9 +7,8 @@ import io.fotoapparat.preview.PreviewStream;
  */
 public interface PreviewStreamOperator {
 
-    /**
-     * @return {@link PreviewStream} associated with camera.
-     */
-    PreviewStream getPreviewStream();
-
+  /**
+   * @return {@link PreviewStream} associated with camera.
+   */
+  PreviewStream getPreviewStream();
 }

@@ -5,14 +5,14 @@ package io.fotoapparat.result;
  */
 public enum FocusResult {
 
-    /**
-     * Camera is focused successfully.
-     */
-    FOCUSED,
+  /**
+   * Camera is focused successfully.
+   */
+  FOCUSED,
 
-    /**
-     * Camera is unable to focus for some reason.
-     */
-    UNABLE_TO_FOCUS
+  /**
+   * Camera is unable to focus for some reason.
+   */
+  UNABLE_TO_FOCUS
 
 }

@@ -7,9 +7,8 @@ import java.util.Collection;
  */
 public interface SelectorFunction<T> {
 
-    /**
-     * @return element from given collection.
-     */
-    T select(Collection<T> items);
-
+  /**
+   * @return element from given collection.
+   */
+  T select(Collection<T> items);
 }

@@ -5,9 +5,7 @@ package io.fotoapparat.log;
  */
 class DummyLogger implements Logger {
 
-    @Override
-    public void log(String message) {
-        // Do nothing
-    }
-
+  @Override public void log(String message) {
+    // Do nothing
+  }
 }

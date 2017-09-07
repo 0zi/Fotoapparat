@@ -8,17 +8,17 @@ import android.os.HandlerThread;
  */
 public class CameraThread extends HandlerThread {
 
-    public CameraThread() {
-        super("CameraThread");
-        start();
-    }
+  public CameraThread() {
+    super("CameraThread");
+    start();
+  }
 
-    /**
-     * Creates a new handler for the this thread.
-     *
-     * @return the new handler for this thread.
-     */
-    public Handler createHandler() {
-        return new Handler(getLooper());
-    }
+  /**
+   * Creates a new handler for the this thread.
+   *
+   * @return the new handler for this thread.
+   */
+  public Handler createHandler() {
+    return new Handler(getLooper());
+  }
 }

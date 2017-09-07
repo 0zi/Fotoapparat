@@ -12,24 +12,23 @@ import static io.fotoapparat.parameter.Parameters.Type.PREVIEW_SIZE;
  */
 public class InitialParametersValidator {
 
-    /**
-     * Validates a set of {@link Parameters} which the {@link io.fotoapparat.hardware.CameraDevice}
-     * needs.
-     *
-     * @param parameters The parameters to validate.
-     */
-    void validate(Parameters parameters) {
-        validateParameter(parameters, PICTURE_SIZE);
-        validateParameter(parameters, PREVIEW_SIZE);
-        validateParameter(parameters, FOCUS_MODE);
-        validateParameter(parameters, FLASH);
+  private static void validateParameter(Parameters parameters, Parameters.Type type) {
+    if (parameters.getValue(type) == null) {
+      throw new IllegalArgumentException(
+          "Opened camera does not support the selected " + type.name().toLowerCase() + " options.");
     }
+  }
 
-    private static void validateParameter(Parameters parameters, Parameters.Type type) {
-        if (parameters.getValue(type) == null) {
-            throw new IllegalArgumentException(
-                    "Opened camera does not support the selected " + type.name().toLowerCase() + " options.");
-        }
-    }
-
+  /**
+   * Validates a set of {@link Parameters} which the {@link io.fotoapparat.hardware.CameraDevice}
+   * needs.
+   *
+   * @param parameters The parameters to validate.
+   */
+  void validate(Parameters parameters) {
+    validateParameter(parameters, PICTURE_SIZE);
+    validateParameter(parameters, PREVIEW_SIZE);
+    validateParameter(parameters, FOCUS_MODE);
+    validateParameter(parameters, FLASH);
+  }
 }

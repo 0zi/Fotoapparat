@@ -5,14 +5,14 @@ package io.fotoapparat.lens;
  */
 public enum CaptureResultState {
 
-    /**
-     * The camera failed to capture a photo.
-     */
-    FAILURE,
+  /**
+   * The camera failed to capture a photo.
+   */
+  FAILURE,
 
-    /**
-     * The camera succeeded to capture a photo.
-     */
-    SUCCESS
+  /**
+   * The camera succeeded to capture a photo.
+   */
+  SUCCESS
 
 }

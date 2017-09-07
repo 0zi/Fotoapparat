@@ -9,49 +9,45 @@ import android.view.TextureView;
  */
 public class TextureSizeChangeListener implements TextureView.SurfaceTextureListener {
 
-    private Listener listener;
+  private Listener listener;
 
-    public TextureSizeChangeListener(Listener listener) {
-        this.listener = listener;
-    }
+  public TextureSizeChangeListener(Listener listener) {
+    this.listener = listener;
+  }
 
-    @Override
-    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        // Do nothing
-    }
+  @Override public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+    // Do nothing
+  }
 
-    @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        if (listener != null) {
-            listener.onTextureSizeChanged(width, height);
-        }
+  @Override public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+    if (listener != null) {
+      listener.onTextureSizeChanged(width, height);
     }
+  }
 
-    @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        if (listener != null) {
-            listener.onTextureSizeChanged(0, 0);
-        }
-        return true;
+  @Override public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+    if (listener != null) {
+      listener.onTextureSizeChanged(0, 0);
     }
+    return true;
+  }
 
-    @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-        // Do nothing
-    }
+  @Override public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+    // Do nothing
+  }
+
+  /**
+   * Listener to be used when the {@link SurfaceTexture}
+   * has a change in its size.
+   */
+  public interface Listener {
 
     /**
-     * Listener to be used when the {@link SurfaceTexture}
-     * has a change in its size.
+     * Invoked when the {@link SurfaceTexture}'s size has changed.
+     *
+     * @param width The new width of the surface
+     * @param height The new height of the surface
      */
-    public interface Listener {
-
-        /**
-         * Invoked when the {@link SurfaceTexture}'s size has changed.
-         *
-         * @param width  The new width of the surface
-         * @param height The new height of the surface
-         */
-        void onTextureSizeChanged(int width, int height);
-    }
+    void onTextureSizeChanged(int width, int height);
+  }
 }

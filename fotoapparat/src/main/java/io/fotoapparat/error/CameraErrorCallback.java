@@ -9,19 +9,17 @@ import io.fotoapparat.hardware.CameraException;
  */
 public interface CameraErrorCallback {
 
-    /**
-     * No-op implementation of {@link CameraErrorCallback}.
-     */
-    CameraErrorCallback NULL = new CameraErrorCallback() {
-        @Override
-        public void onError(CameraException e) {
-            // Do nothing
-        }
-    };
+  /**
+   * No-op implementation of {@link CameraErrorCallback}.
+   */
+  CameraErrorCallback NULL = new CameraErrorCallback() {
+    @Override public void onError(CameraException e) {
+      // Do nothing
+    }
+  };
 
-    /**
-     * Notified when a camera error happens within Fotoapparat.
-     */
-    void onError(CameraException e);
-
+  /**
+   * Notified when a camera error happens within Fotoapparat.
+   */
+  void onError(CameraException e);
 }

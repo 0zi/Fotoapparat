@@ -11,30 +11,25 @@ import io.fotoapparat.photo.Photo;
 /**
  * Captures a picture.
  */
-@SuppressWarnings("NewApi")
-public class CaptureOperatorImpl implements CaptureOperator {
+@SuppressWarnings("NewApi") public class CaptureOperatorImpl implements CaptureOperator {
 
-    private final LensOperationsFactory lensOperationsFactory;
-    private final StillSurfaceReader stillSurfaceReader;
-    private final OrientationManager orientationManager;
+  private final LensOperationsFactory lensOperationsFactory;
+  private final StillSurfaceReader stillSurfaceReader;
+  private final OrientationManager orientationManager;
 
-    public CaptureOperatorImpl(LensOperationsFactory lensOperationsFactory,
-                               StillSurfaceReader stillSurfaceReader,
-                               OrientationManager orientationManager) {
-        this.lensOperationsFactory = lensOperationsFactory;
-        this.stillSurfaceReader = stillSurfaceReader;
-        this.orientationManager = orientationManager;
-    }
+  public CaptureOperatorImpl(LensOperationsFactory lensOperationsFactory,
+      StillSurfaceReader stillSurfaceReader, OrientationManager orientationManager) {
+    this.lensOperationsFactory = lensOperationsFactory;
+    this.stillSurfaceReader = stillSurfaceReader;
+    this.orientationManager = orientationManager;
+  }
 
-    @Override
-    public Photo takePicture() {
-        LensOperation<CaptureResultState> captureOperation = lensOperationsFactory.createCaptureOperation();
+  @Override public Photo takePicture() {
+    LensOperation<CaptureResultState> captureOperation =
+        lensOperationsFactory.createCaptureOperation();
 
-        captureOperation.call();
+    captureOperation.call();
 
-        return new Photo(
-                stillSurfaceReader.getPhotoBytes(),
-                orientationManager.getPhotoOrientation()
-        );
-    }
+    return new Photo(stillSurfaceReader.getPhotoBytes(), orientationManager.getPhotoOrientation());
+  }
 }

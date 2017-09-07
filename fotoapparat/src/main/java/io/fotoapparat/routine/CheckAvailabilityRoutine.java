@@ -9,25 +9,24 @@ import io.fotoapparat.parameter.selector.SelectorFunction;
  */
 public class CheckAvailabilityRoutine {
 
-    private final CameraDevice cameraDevice;
-    private final SelectorFunction<LensPosition> lensPositionSelector;
+  private final CameraDevice cameraDevice;
+  private final SelectorFunction<LensPosition> lensPositionSelector;
 
-    public CheckAvailabilityRoutine(CameraDevice cameraDevice,
-                                    SelectorFunction<LensPosition> lensPositionSelector) {
-        this.cameraDevice = cameraDevice;
-        this.lensPositionSelector = lensPositionSelector;
-    }
+  public CheckAvailabilityRoutine(CameraDevice cameraDevice,
+      SelectorFunction<LensPosition> lensPositionSelector) {
+    this.cameraDevice = cameraDevice;
+    this.lensPositionSelector = lensPositionSelector;
+  }
 
-    /**
-     * @return {@code true} if selected lens position is available. {@code false} if it is not
-     * available.
-     */
-    public boolean isAvailable() {
-        return selectedLensPosition() != null;
-    }
+  /**
+   * @return {@code true} if selected lens position is available. {@code false} if it is not
+   * available.
+   */
+  public boolean isAvailable() {
+    return selectedLensPosition() != null;
+  }
 
-    private LensPosition selectedLensPosition() {
-        return lensPositionSelector.select(cameraDevice.getAvailableLensPositions());
-    }
-
+  private LensPosition selectedLensPosition() {
+    return lensPositionSelector.select(cameraDevice.getAvailableLensPositions());
+  }
 }

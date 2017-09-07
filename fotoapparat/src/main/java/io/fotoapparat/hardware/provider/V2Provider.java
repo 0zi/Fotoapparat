@@ -4,7 +4,6 @@ import android.content.Context;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-
 import io.fotoapparat.hardware.CameraDevice;
 import io.fotoapparat.hardware.v2.Camera2;
 import io.fotoapparat.hardware.v2.CameraThread;
@@ -32,115 +31,64 @@ import io.fotoapparat.log.Logger;
  */
 public class V2Provider implements CameraProvider {
 
-    private static final CameraThread CAMERA_THREAD = new CameraThread();
-    private final Context context;
+  private static final CameraThread CAMERA_THREAD = new CameraThread();
+  private final Context context;
 
-    public V2Provider(Context context) {
-        this.context = context;
-    }
+  public V2Provider(Context context) {
+    this.context = context;
+  }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    public CameraDevice get(Logger logger) {
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP) @Override
+  public CameraDevice get(Logger logger) {
 
-        CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-        AvailableLensPositionsProvider availableLensPositionsProvider = new V2AvailableLensPositionProvider(
-                context
-        );
+    CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+    AvailableLensPositionsProvider availableLensPositionsProvider =
+        new V2AvailableLensPositionProvider(context);
 
-        CameraSelector cameraSelector = new CameraSelector(manager);
+    CameraSelector cameraSelector = new CameraSelector(manager);
 
-        CameraConnection cameraConnection = new CameraConnection(
-                cameraSelector,
-                manager,
-                CAMERA_THREAD
-        );
+    CameraConnection cameraConnection =
+        new CameraConnection(cameraSelector, manager, CAMERA_THREAD);
 
-        ParametersProvider parametersProvider = new ParametersProvider();
+    ParametersProvider parametersProvider = new ParametersProvider();
 
-        OrientationManager orientationManager = new OrientationManager(
-                cameraConnection
-        );
+    OrientationManager orientationManager = new OrientationManager(cameraConnection);
 
-        StillSurfaceReader stillSurfaceReader = new StillSurfaceReader(
-                parametersProvider,
-                CAMERA_THREAD
-        );
-        ContinuousSurfaceReader continuousSurfaceReader = new ContinuousSurfaceReader(
-                parametersProvider,
-                CAMERA_THREAD
-        );
-        TextureManager textureManager = new TextureManager(
-                orientationManager,
-                parametersProvider
-        );
+    StillSurfaceReader stillSurfaceReader =
+        new StillSurfaceReader(parametersProvider, CAMERA_THREAD);
+    ContinuousSurfaceReader continuousSurfaceReader =
+        new ContinuousSurfaceReader(parametersProvider, CAMERA_THREAD);
+    TextureManager textureManager = new TextureManager(orientationManager, parametersProvider);
 
-        CaptureRequestFactory captureRequestFactory = new CaptureRequestFactory(
-                cameraConnection,
-                stillSurfaceReader,
-                textureManager,
-                parametersProvider
-        );
+    CaptureRequestFactory captureRequestFactory =
+        new CaptureRequestFactory(cameraConnection, stillSurfaceReader, textureManager,
+            parametersProvider);
 
-        SessionProvider sessionProvider = new SessionProvider(
-                stillSurfaceReader,
-                cameraConnection,
-                captureRequestFactory,
-                textureManager,
-                CAMERA_THREAD
-        );
+    SessionProvider sessionProvider =
+        new SessionProvider(stillSurfaceReader, cameraConnection, captureRequestFactory,
+            textureManager, CAMERA_THREAD);
 
-        SessionManager sessionManager = new SessionManager(
-                cameraConnection,
-                sessionProvider
-        );
+    SessionManager sessionManager = new SessionManager(cameraConnection, sessionProvider);
 
-        CapabilitiesFactory capabilitiesOperator = new CapabilitiesFactory(cameraConnection);
+    CapabilitiesFactory capabilitiesOperator = new CapabilitiesFactory(cameraConnection);
 
-        PreviewStream2 previewStream = new PreviewStream2(
-                continuousSurfaceReader,
-                parametersProvider,
-                logger
-        );
+    PreviewStream2 previewStream =
+        new PreviewStream2(continuousSurfaceReader, parametersProvider, logger);
 
-        RendererParametersProvider rendererParametersOperator = new RendererParametersProvider(
-                parametersProvider,
-                orientationManager
-        );
+    RendererParametersProvider rendererParametersOperator =
+        new RendererParametersProvider(parametersProvider, orientationManager);
 
-        LensOperationsFactory lensOperationsFactory = new LensOperationsFactory(
-                sessionManager,
-                captureRequestFactory,
-                CAMERA_THREAD
-        );
+    LensOperationsFactory lensOperationsFactory =
+        new LensOperationsFactory(sessionManager, captureRequestFactory, CAMERA_THREAD);
 
-        FocusExecutor focusExecutor = new FocusExecutor(
-                parametersProvider,
-                lensOperationsFactory
-        );
-        ExposureGatheringExecutor exposureGatheringExecutor = new ExposureGatheringExecutor(
-                lensOperationsFactory
-        );
-        CaptureOperatorImpl captureExecutor = new CaptureOperatorImpl(
-                lensOperationsFactory,
-                stillSurfaceReader,
-                orientationManager
-        );
+    FocusExecutor focusExecutor = new FocusExecutor(parametersProvider, lensOperationsFactory);
+    ExposureGatheringExecutor exposureGatheringExecutor =
+        new ExposureGatheringExecutor(lensOperationsFactory);
+    CaptureOperatorImpl captureExecutor =
+        new CaptureOperatorImpl(lensOperationsFactory, stillSurfaceReader, orientationManager);
 
-        return new Camera2(
-                logger,
-                cameraConnection,
-                sessionManager,
-                textureManager,
-                orientationManager,
-                parametersProvider,
-                capabilitiesOperator,
-                previewStream,
-                rendererParametersOperator,
-                focusExecutor,
-                exposureGatheringExecutor,
-                captureExecutor,
-                availableLensPositionsProvider
-        );
-    }
+    return new Camera2(logger, cameraConnection, sessionManager, textureManager, orientationManager,
+        parametersProvider, capabilitiesOperator, previewStream, rendererParametersOperator,
+        focusExecutor, exposureGatheringExecutor, captureExecutor, availableLensPositionsProvider);
+  }
 }

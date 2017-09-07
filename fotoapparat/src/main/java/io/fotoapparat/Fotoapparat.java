@@ -210,6 +210,10 @@ public class Fotoapparat {
     stopCamera();
   }
 
+  public boolean isStarted() {
+    return started;
+  }
+
   private void startCamera() {
     executor.execute(startCameraRoutine);
   }

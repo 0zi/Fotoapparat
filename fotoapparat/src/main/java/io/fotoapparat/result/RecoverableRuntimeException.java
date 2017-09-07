@@ -5,19 +5,18 @@ package io.fotoapparat.result;
  */
 public class RecoverableRuntimeException extends RuntimeException {
 
-    public RecoverableRuntimeException() {
-    }
+  public RecoverableRuntimeException() {
+  }
 
-    public RecoverableRuntimeException(String message) {
-        super(message);
-    }
+  public RecoverableRuntimeException(String message) {
+    super(message);
+  }
 
-    public RecoverableRuntimeException(String message, Throwable cause) {
-        super(message, cause);
-    }
+  public RecoverableRuntimeException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    public RecoverableRuntimeException(Throwable cause) {
-        super(cause);
-    }
-
+  public RecoverableRuntimeException(Throwable cause) {
+    super(cause);
+  }
 }

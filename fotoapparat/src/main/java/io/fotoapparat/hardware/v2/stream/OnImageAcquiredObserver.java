@@ -5,25 +5,24 @@ package io.fotoapparat.hardware.v2.stream;
  */
 public interface OnImageAcquiredObserver {
 
+  /**
+   * Sets a {@link OnFrameAcquiredListener}.
+   *
+   * @param listener The listener to be used.
+   */
+  void setListener(OnFrameAcquiredListener listener);
+
+  /**
+   * Notified when an image has been acquired.
+   */
+  interface OnFrameAcquiredListener {
+
     /**
-     * Sets a {@link OnFrameAcquiredListener}.
+     * Called when an image has been acquired.
      *
-     * @param listener The listener to be used.
+     * @param bytes The image as a byte array.
      */
-    void setListener(OnFrameAcquiredListener listener);
-
-    /**
-     * Notified when an image has been acquired.
-     */
-    interface OnFrameAcquiredListener {
-
-        /**
-         * Called when an image has been acquired.
-         *
-         * @param bytes The image as a byte array.
-         */
-        void onFrameAcquired(byte[] bytes);
-
-    }
+    void onFrameAcquired(byte[] bytes);
+  }
 }
 

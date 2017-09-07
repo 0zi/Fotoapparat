@@ -7,9 +7,7 @@ import android.util.Log;
  */
 class LogcatLogger implements Logger {
 
-    @Override
-    public void log(String message) {
-        Log.d("Fotoapparat", message);
-    }
-
+  @Override public void log(String message) {
+    Log.d("Fotoapparat", message);
+  }
 }

@@ -8,26 +8,22 @@ import io.fotoapparat.parameter.Parameters;
  */
 public class SplitParametersOperator implements ParametersOperator {
 
-    private final ParametersOperator wrapped;
+  private final ParametersOperator wrapped;
 
-    public SplitParametersOperator(ParametersOperator wrapped) {
-        this.wrapped = wrapped;
+  public SplitParametersOperator(ParametersOperator wrapped) {
+    this.wrapped = wrapped;
+  }
+
+  @Override public void updateParameters(Parameters parameters) {
+    for (Parameters.Type type : parameters.storedTypes()) {
+      wrapped.updateParameters(newParameters(type, parameters.getValue(type)));
     }
+  }
 
-    @Override
-    public void updateParameters(Parameters parameters) {
-        for (Parameters.Type type : parameters.storedTypes()) {
-            wrapped.updateParameters(
-                    newParameters(type, parameters.getValue(type))
-            );
-        }
-    }
+  private Parameters newParameters(Parameters.Type type, Object value) {
+    Parameters parameters = new Parameters();
+    parameters.putValue(type, value);
 
-    private Parameters newParameters(Parameters.Type type, Object value) {
-        Parameters parameters = new Parameters();
-        parameters.putValue(type, value);
-
-        return parameters;
-    }
-
+    return parameters;
+  }
 }

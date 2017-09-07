@@ -5,9 +5,8 @@ package io.fotoapparat.hardware.operators;
  */
 public interface ExposureMeasurementOperator {
 
-    /**
-     * Measures the exposure. This is a blocking operation which returns when measurement completes.
-     */
-    void measureExposure();
-
+  /**
+   * Measures the exposure. This is a blocking operation which returns when measurement completes.
+   */
+  void measureExposure();
 }

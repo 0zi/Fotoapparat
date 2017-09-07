@@ -8,22 +8,19 @@ import io.fotoapparat.parameter.Parameters;
  */
 public class SwitchOnFailureParametersOperator implements ParametersOperator {
 
-    private final ParametersOperator first;
-    private final ParametersOperator second;
+  private final ParametersOperator first;
+  private final ParametersOperator second;
 
-    public SwitchOnFailureParametersOperator(ParametersOperator first,
-                                             ParametersOperator second) {
-        this.first = first;
-        this.second = second;
+  public SwitchOnFailureParametersOperator(ParametersOperator first, ParametersOperator second) {
+    this.first = first;
+    this.second = second;
+  }
+
+  @Override public void updateParameters(Parameters parameters) {
+    try {
+      first.updateParameters(parameters);
+    } catch (Exception e) {
+      second.updateParameters(parameters);
     }
-
-    @Override
-    public void updateParameters(Parameters parameters) {
-        try {
-            first.updateParameters(parameters);
-        } catch (Exception e) {
-            second.updateParameters(parameters);
-        }
-    }
-
+  }
 }

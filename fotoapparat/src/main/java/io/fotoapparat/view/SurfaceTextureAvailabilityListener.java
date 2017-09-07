@@ -9,47 +9,43 @@ import android.view.TextureView;
  */
 public class SurfaceTextureAvailabilityListener implements TextureView.SurfaceTextureListener {
 
-    private Listener listener;
+  private Listener listener;
 
-    public SurfaceTextureAvailabilityListener(Listener listener) {
-        this.listener = listener;
-    }
+  public SurfaceTextureAvailabilityListener(Listener listener) {
+    this.listener = listener;
+  }
 
-    @Override
-    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        if (listener != null) {
-            listener.onSurfaceAvailable(surface);
-        }
+  @Override public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+    if (listener != null) {
+      listener.onSurfaceAvailable(surface);
     }
+  }
 
-    @Override
-    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        // Do nothing
-    }
+  @Override public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+    // Do nothing
+  }
 
-    @Override
-    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-        // Do nothing
-        return true;
-    }
+  @Override public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+    // Do nothing
+    return true;
+  }
 
-    @Override
-    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-        // Do nothing
-    }
+  @Override public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+    // Do nothing
+  }
+
+  /**
+   * Listener to be used when the {@link SurfaceTexture}
+   * has a change in its availability.
+   */
+  public interface Listener {
 
     /**
-     * Listener to be used when the {@link SurfaceTexture}
-     * has a change in its availability.
+     * Invoked when a {@link TextureView}'s SurfaceTexture is ready for use.
+     *
+     * @param surface The surface returned by
+     * {@link android.view.TextureView#getSurfaceTexture()}
      */
-    public interface Listener {
-
-        /**
-         * Invoked when a {@link TextureView}'s SurfaceTexture is ready for use.
-         *
-         * @param surface The surface returned by
-         *                {@link android.view.TextureView#getSurfaceTexture()}
-         */
-        void onSurfaceAvailable(SurfaceTexture surface);
-    }
+    void onSurfaceAvailable(SurfaceTexture surface);
+  }
 }
